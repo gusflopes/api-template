@@ -1,4 +1,5 @@
 'use strict';
+
 const express = require('express');
 const controller = require('./vendors.controller');
 const router = express.Router();

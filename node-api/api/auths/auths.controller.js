@@ -10,14 +10,19 @@ module.exports = {
     login: (req, res) => {
         User.findOne({username : req.body.username},function(err, user){
             if(err){
-                return res.status(401).json({message : err});
-            }
-    
+                return res.status(401).json({message : err})
+            };
+            /* Trying to repair error when username is not on DB */
+            if(user === null) {
+                return res.status(401).json({auth : false, token : null, message : "Not Authorised User"});
+            };
+            /* Done! */
+
             var isPasswordValid = bcrypt.compareSync(req.body.password, user.password);
     
             if(!isPasswordValid){
                 return res.status(401).json({auth : false, token : null, message : "Not Authorised User"});
-            }else{
+            } else{
     
                 let payload = {
                     user_id : user._id,

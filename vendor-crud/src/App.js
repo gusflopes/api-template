@@ -20,6 +20,8 @@ class App extends Component {
                         <PrivateRoute exact path='/add-vendor' component={AddVendor} />
                         <PrivateRoute exact path='/edit-vendor/:id' component={AddVendor} />
                         <Route exact path='/' component={Login} />
+                        {/* Caso digite um path não mapeado, retorna ao Login ou Home*/}
+                        <Route component={Login} />
                      </Switch>
                  </div>
                </Router>

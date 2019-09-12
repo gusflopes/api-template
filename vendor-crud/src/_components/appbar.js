@@ -57,7 +57,7 @@ class PermanentDrawer extends React.Component {
             >
                <Toolbar>
                   <Typography variant="title" color="inherit" noWrap>
-                   CRUD
+                   [LSCONT-Jur] Sistema de Controle de Prazos
                   </Typography>
                 </Toolbar>
            </AppBar>

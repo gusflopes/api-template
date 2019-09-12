@@ -49,6 +49,8 @@ class Home extends Component {
                  <main className={classes.content}>
                      <div className={classes.toolbar} />
                      <Typography>{'Home'}</Typography>
+                     <p>Em breve novidades para você.</p>
+                     <p></p><p>Desenvolvido por: Gustavo Lopes</p>
                  </main>
                </div>
             </div>

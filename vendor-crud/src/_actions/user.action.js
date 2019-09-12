@@ -14,15 +14,19 @@ function login(username, password){
        }
        userService.post(apiEndpoint, payload)
        .then((response)=>{
+           //console.log(response);
            if (response.data.token) {
              localStorage.setItem('token', response.data.token);
              localStorage.setItem('auth', response.data.auth);
              dispatch(setUserDetails(response.data));
              history.push('/home');
-           }
-       })
-    };
-}
+        }})
+        .catch((err) => {
+          console.log(err);
+          history.push('home');
+        })
+    }};
+
 function logout(){
     return dispatch => {
         localStorage.removeItem('auth');

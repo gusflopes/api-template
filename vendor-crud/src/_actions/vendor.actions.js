@@ -1,5 +1,8 @@
+
+import { Client } from '../api/client.js';
 import { userService } from '../_services/';
 import { history } from '../_helpers';
+import { isSymbol } from 'util';
 
 export const vendorAction = {
     getVendor,
@@ -11,13 +14,27 @@ export const vendorAction = {
 };
 function getVendor(){
     return dispatch => {
-        let apiEndpoint = 'vendors';
-        userService.get(apiEndpoint)
-        .then((response)=>{
+    // aqui a gente cria uma nova instancia do client 
+    const client = new Client("http://localhost:8001/api/v1/", err => {
+        console.log("Error: ", err);
+      });
+
+      // isso... a parte do front eu gosto de validar o tempo... se estiver dentro do tempo faz a chamada e valida o jwt
+      // se ja tiver passado o tempo, nem queima processamento do back e ja manda o cidadão pra area de login.
+
+      // quando você for fazer o get de tasks, por exemplo, se vc implementar o client igual ta aqui e chamar ele, vai funcionar.
+
+      // vou deixar ele comentado pro c, pq la na frente vc deve ter que usar isso... Esse validateJwt valida apenas o TEMPO que ele ainda tem.
+      // Valida se o jwt ta valido... se não tiver te redireciona pro login
+      //   if (!client.validateJwt()) {
+      //     this.props.history.push("login");
+      //   }
+  
+        client.get("vendors/", true).then((response)=> {
             dispatch(changeVendorsList(response.data.data));
         }).catch((err)=>{
             console.log(err);
-        })
+        });
    };
 }
 function createVendor(payload){

@@ -5,6 +5,8 @@ const Vendor = require('../vendors/vendors.model');
 
 module.exports = {
     index: (req, res) => {
+        let token = req.headers['x-access-token'];
+
         Vendor
         .find({})
         .exec((err, vendorDetails)=>{
@@ -12,7 +14,8 @@ module.exports = {
                 console.error(err);
                 res.status(500).json({message : err})
             }
-            res.status(200).json({ message: "Vendor Details fetched Successfully", data : vendorDetails});
+            //res.status(200).json({ message: "Vendor Details fetched Successfully", data : vendorDetails});
+            res.status(200).json({auth: true, token: token , data: vendorDetails, message: "Vendor Details fetched Successfully" });
         })
     },
     retrieve: (req, res) => {

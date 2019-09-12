@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
+    organization_id : {
+        type: String,
+        //required: true
+    },
+    
     name : {
         type: String,
         required: true
@@ -11,7 +16,7 @@ const TaskSchema = new Schema({
     description : {
         type: String,
     },
-    agent : {
+    assignedTo : {
        type: String,
        required: true
     },

@@ -3,8 +3,10 @@
 module.exports = {
 
     secrets: {
-        session: "vendor-erp",
+        session: "lego-api-template",
         expiresIn: 2629746000
+        //Expiração em 10 minutos paraquando implementar o refresh token
+        //expiresIn: 604800
     },
 
     db:{

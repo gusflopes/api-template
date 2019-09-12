@@ -26,7 +26,8 @@ module.exports = {
     
                 let payload = {
                     user_id : user._id,
-                    username : user.username
+                    username : user.username,
+                    organization_id : user.organization_id
                 }
     
                 console.log(config.secrets.session);

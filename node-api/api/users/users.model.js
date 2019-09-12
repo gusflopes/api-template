@@ -21,6 +21,9 @@ const UserSchema = new Schema({
     is_active: {
         type: Boolean,
         default: true
+    },
+    organization_id: {
+        type: String,
     }
 },{
     id: false,

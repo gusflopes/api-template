@@ -15,6 +15,7 @@ User.countDocuments({}).exec((err, count) => {
   if (count == 0) {
     User.create({
         name : 'Gustavo Lopes',
+        organization_id: 'org1',
         username : 'admin',
         password : 'admin'
     }, (err, seedUser) => {
@@ -22,9 +23,23 @@ User.countDocuments({}).exec((err, count) => {
         console.error(err);
         return;
       }
-      console.log("Seed superuser created");
+      console.log("Seed superuser 01 created");
 
-    })
+    });
+    User.create({
+      name : 'Francisco Lopes',
+      organization_id: 'org2',
+      username : 'admin2',
+      password : 'admin'
+  }, (err, seedUser) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log("Seed superuser 02 created");
+
+  });
+
   }
 
 })

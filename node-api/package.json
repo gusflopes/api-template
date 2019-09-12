@@ -1,14 +1,14 @@
 {
-  "name": "vendor-crud-sample",
+  "name": "api-template",
   "version": "1.0.0",
-  "description": "Sample CRUD Application for Medium Post",
+  "description": "Modelo de API usando NodeJS + JWT + MongoDB",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emanuelraj/vendor-crud-sample-medium-post.git"
+    "url": "git+https://github.com/gusflopes/apitemplate.git"
   },
   "keywords": [
     "React",
@@ -17,12 +17,12 @@
     "Application",
     "Sample"
   ],
-  "author": "Allen Emanuel Raj D",
+  "author": "Gustavo Lopes",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/emanuelraj/vendor-crud-sample-medium-post/issues"
+    "url": "https://github.com/gusflopes/api-template/issues"
   },
-  "homepage": "https://github.com/emanuelraj/vendor-crud-sample-medium-post#readme",
+  "homepage": "https://github.com/gusflopes/api-template#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

@@ -14,9 +14,9 @@ User.countDocuments({}).exec((err, count) => {
   }
   if (count == 0) {
     User.create({
-        name : 'Allen',
-        username : 'allen',
-        password : 'vendoradmin'
+        name : 'Gustavo Lopes',
+        username : 'admin',
+        password : 'admin'
     }, (err, seedUser) => {
       if (err) {
         console.error(err);

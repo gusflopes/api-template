@@ -7,7 +7,7 @@ var NewToken = express.Router();
 
 NewToken.use(function(req, res, next){
 
-    console.log('Preparando para Gerar Novo Token');
+    //console.log('Preparando para Gerar Novo Token');
     /*
     console.log(req.headers['x-access-token']);
     console.log('Session: ' + config.secrets.session);
@@ -28,8 +28,8 @@ NewToken.use(function(req, res, next){
     let token = jwt.sign(payload, config.secrets.session, {
         expiresIn : config.secrets.expiresIn
     });
-    console.log("Lá vai o novo Token: ");
-    console.log(token);
+    //console.log("Lá vai o novo Token: ");
+    //console.log(token);
 
     //console.log("Antigo Token ou Novo?");
     req.headers['x-access-token'] = token;

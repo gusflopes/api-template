@@ -80,7 +80,7 @@ class Navigation extends React.Component {
                      </ListItemIcon>
                      <ListItemText primary="Vendors"/>
                   </ListItem>
-                  <ListItem button component='a' href="/tasks">
+                  <ListItem button component='a' href="/task">
                      <ListItemIcon>
                         <TaskIcon />
                      </ListItemIcon>

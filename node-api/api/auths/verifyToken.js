@@ -6,7 +6,7 @@ var VerifyToken = express.Router();
 
 VerifyToken.use(function(req, res, next){
 
-    console.log('Verificando token');
+    //console.log('Verificando token');
 
     var token = req.headers['x-access-token'];
     if(!token){
@@ -14,7 +14,7 @@ VerifyToken.use(function(req, res, next){
     }
 
     jwt.verify(token, config.secrets.session, function(err, decoded){
-        console.log('Token: ' + token);
+        //console.log('Token: ' + token);
         console.log('Session: ' + config.secrets.session);
         if(err){
             console.log(err);

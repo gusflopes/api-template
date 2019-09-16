@@ -2,11 +2,10 @@ import { connect } from 'react-redux';
 import { taskAction } from '../_actions';
 import React, { Component } from 'react';
 import AppBar from '../_components/appbar';
-import Nav from '../_components/nav';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import Nav from '../_components/nav';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
+import { withRouter } from 'react-router-dom';
 const drawerWidth = 240;
 const styles = theme => ({
     root: {
@@ -123,7 +123,7 @@ class Task extends Component {
                                     </TableCell>
                                     <TableCell numeric>{n.description}</TableCell>
                                     <TableCell numeric>{n.assignedTo}</TableCell>
-                                    <TableCell>{formatDate(n.dueDate)}</TableCell>
+                                    <TableCell>{n.dueDate}</TableCell>
                                     <TableCell>
                                         <IconButton className={classes.button} aria-label="Edit" component='a' href={`/edit-task/${n._id}`}>
                                            <EditIcon />
@@ -148,12 +148,6 @@ class Task extends Component {
 Task.propTypes = {
      classes: PropTypes.object.isRequired,
 };
-
-function formatDate(date) {
-    date = "RESOLVENDO";
-    return date;
-}
-
 const mapStateToProps = (state) =>{
     return {
        task : state.task

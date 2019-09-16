@@ -1,5 +1,5 @@
 
-import { Client } from '../api/client.js';
+import { Client } from '../_services/client.js';
 import { userService } from '../_services/';
 import { history } from '../_helpers';
 import { isSymbol } from 'util';
@@ -25,7 +25,7 @@ function getVendor(){
       // quando você for fazer o get de tasks, por exemplo, se vc implementar o client igual ta aqui e chamar ele, vai funcionar.
 
       // vou deixar ele comentado pro c, pq la na frente vc deve ter que usar isso... Esse validateJwt valida apenas o TEMPO que ele ainda tem.
-      // Valida se o jwt ta valido... se não tiver te redireciona pro login
+      // Valida se o jwt ta valido... se não tiver te redireciona pro loginc, pq la na frente vc deve ter que usar isso... Esse validateJwt valida apenas o TEMPO que ele ainda tem.
       //   if (!client.validateJwt()) {
       //     this.props.history.push("login");
       //   }

@@ -1,5 +1,5 @@
 
-import { Client } from '../api/client.js';
+import { Client } from '../_services/client.js';
 import { userService } from '../_services/';
 import { history } from '../_helpers';
 import { isSymbol } from 'util';

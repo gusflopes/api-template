@@ -8,6 +8,13 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import moment from 'moment';
+
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+
+import { MuiPickersUtilsProvider,
+    KeyboardDatePicker } from '@material-ui/pickers';
 
 import { connect } from 'react-redux';
 import { taskAction } from '../_actions';
@@ -49,14 +56,32 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3,
     },
 });
+
 class AddTask extends Component {
     handleChange = prop => event => {
+        console.log(this.props);
+        console.log(this.event);
+
+        console.log('Prop param', prop)
+        console.log('event param', event)
+        
         const { dispatch } = this.props;
         dispatch(taskAction.onChangeProps(prop, event));
+    }
+    handleDateChange = (prop) => {
+        const event = {
+            target: {
+                value: moment(prop).format('DD/MM/YYYY')
+            }
+        }
+
+        const { dispatch } = this.props;
+        dispatch(taskAction.onChangeProps('dueDate', event));
     };
+
     componentDidMount() {
         const { match : { params } } = this.props;
-        if(params.id){
+        if(params.id) {
             const { dispatch } = this.props;
             dispatch(taskAction.getTaskById(params.id));
         }
@@ -64,12 +89,16 @@ class AddTask extends Component {
     handleClick(event){
         const { match : { params } } = this.props;
         const { dispatch } = this.props;
+        console.log('Erro antes do payload');
+
         let payload={
             name: this.props.task.name,
             description: this.props.task.description,
             assignedTo: this.props.task.assignedTo,
-            dueDate: this.props.task.dueDate,
+            dueDate: moment(this.props.task.dueDate, "DD/MM/YYYY").toDate()
         }
+        console.log("dueDate", payload);
+
         if(params.id){
             dispatch(taskAction.editTaskInfo(params.id, payload));
         }else{
@@ -145,18 +174,24 @@ class AddTask extends Component {
                                        margin="normal"
                                       />
                                    </Grid>
+                                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                    <Grid item xs={3}>
-                                      <TextField
-                                       id="dueDate"
-                                       label="dueDate"
-                                       multiline
-                                       rowsMax="4"
-                                       className={classes.textField}
-                                       value={this.props.task.dueDate}
-                                       onChange={this.handleChange('dueDate')}
-                                       margin="normal"
+                                      <KeyboardDatePicker
+                                        id="dueDate"
+                                        label="dueDate"
+                                        multiline
+                                        rowsMax="4"
+                                        format="dd/MM/yyyy"
+                                        disablePast="true"
+                                        className={classes.textField}
+                                        inputValue={this.props.task.dueDate}
+                                        value={this.props.task.dueDate}
+                                        onChange={this.handleDateChange}
+                                        margin="normal"
+                                        KeyboardButtonProps={{'aria-label': 'change date'}}
                                       />
                                    </Grid>
+                                   </MuiPickersUtilsProvider>
                                 </Grid>
                                 <br />
                                 <Grid container spacing={24}>

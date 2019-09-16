@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import AppBar from '../_components/appbar';
 import Nav from '../_components/nav';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
@@ -123,7 +124,7 @@ class Task extends Component {
                                     </TableCell>
                                     <TableCell numeric>{n.description}</TableCell>
                                     <TableCell numeric>{n.assignedTo}</TableCell>
-                                    <TableCell>{formatDate(n.dueDate)}</TableCell>
+                                    <TableCell>{moment(n.dueDate).format('DD/MM/YYYY')}</TableCell>
                                     <TableCell>
                                         <IconButton className={classes.button} aria-label="Edit" component='a' href={`/edit-task/${n._id}`}>
                                            <EditIcon />
@@ -148,11 +149,6 @@ class Task extends Component {
 Task.propTypes = {
      classes: PropTypes.object.isRequired,
 };
-
-function formatDate(date) {
-    date = "RESOLVENDO";
-    return date;
-}
 
 const mapStateToProps = (state) =>{
     return {

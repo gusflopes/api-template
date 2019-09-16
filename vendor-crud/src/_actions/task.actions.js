@@ -2,16 +2,21 @@
 import { Client } from '../_services/client.js';
 import { userService } from '../_services/';
 import { history } from '../_helpers';
-import { isSymbol } from 'util';
+import 'date-fns';
+//import moment from 'moment';
+//import { isSymbol } from 'util';
+//import { useDebugValue, useState } from 'react';
 
 export const taskAction = {
     getTask,
     getTaskById,
     onChangeProps,
+    onChangeDate,
     editTaskInfo,
     createTask,
     deleteTaskById
 };
+
 function getTask(){
     return dispatch => {
     // aqui a gente cria uma nova instancia do client 
@@ -61,6 +66,13 @@ function onChangeProps(props, event){
         dispatch(handleOnChangeProps(props, event.target.value));
     }
 }
+function onChangeDate(props){
+    return dispatch =>{
+        console.log("Estou no Task.Action", props)
+        dispatch(handleOnChangeDate(props));
+    }
+}
+
 function editTaskInfo(id, payload){
     return dispatch => {
         let apiEndpoint = 'tasks/'+ id;
@@ -88,12 +100,25 @@ export function changeTasksList(task){
     }
 }
 export function handleOnChangeProps(props, value){
+    console.log("testando!!");
+    console.log();
     return{
         type: "HANDLE_ON_CHANGE",
         props: props,
         value: value
+       
     }
 }
+
+export function handleOnChangeDate(props, value){
+    console.log("PARTE FINAL do Task.Action");
+    return{
+        type: "HANDLE_ON_DATECHANGE",
+        props: props,
+        value: value
+    }
+}
+
 export function editTasksDetails(task){
     return{
         type: "TASK_DETAIL",
@@ -101,7 +126,7 @@ export function editTasksDetails(task){
         name: task.name,
         description: task.description,
         assignedTo: task.assignedTo,
-        pending: task.pending
+        dueDate: task.dueDate
     }
 }
 export function updatedUserInfo(){

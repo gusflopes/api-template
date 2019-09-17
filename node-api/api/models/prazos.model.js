@@ -3,32 +3,32 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
-    organization_id : {
+const PrazoSchema = new Schema({
+    escritorio_id : {
         type: String,
         //required: true
     },
     
-    process_number: {
+    numero_processo: {
         type: String,
         required: false
     },
-    name : {
+    tipo : {
         type: String,
         required: true
     },
-    description : {
+    descricao : {
         type: String,
     },
-    assignedTo : {
+    responsavel : {
        type: String,
        required: true
     },
-    dueDate : {
+    prazo : {
         type: Date,
         required: true
     },
-    pending : {
+    pendente : {
         type: Boolean,
         default: true
     },
@@ -50,8 +50,8 @@ const TaskSchema = new Schema({
     timestamps: true
 });
 
-TaskSchema.pre('find', function () {
+PrazoSchema.pre('find', function () {
     this.where({ is_active: { $ne: false } });
 });
 
-module.exports = mongoose.model('Task', TaskSchema);
+module.exports = mongoose.model('Prazo', PrazoSchema);

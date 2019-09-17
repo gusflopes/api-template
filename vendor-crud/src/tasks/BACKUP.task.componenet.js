@@ -2,10 +2,12 @@ import { connect } from 'react-redux';
 import { taskAction } from '../_actions';
 import React, { Component } from 'react';
 import AppBar from '../_components/appbar';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Nav from '../_components/nav';
+import PropTypes from 'prop-types';
+import moment from 'moment';
+import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,8 +18,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import IconButton from '@material-ui/core/IconButton';
-import { withRouter } from 'react-router-dom';
 const drawerWidth = 240;
 const styles = theme => ({
     root: {
@@ -62,12 +64,22 @@ class Task extends Component {
         const { dispatch } = this.props;
         dispatch(taskAction.getTask());
     }
+    componentDidUpdate() {
+        // Delete this later
+        console.log(this.props.task);
+    }
+
     handleChange = event => {
         this.setState({
             anchor: event.target.value,
         });
     };
-    handleClick = (event, id) => {
+    handleDoneClick = (event, id) => {
+        const { dispatch } = this.props;
+        dispatch(taskAction.deleteTaskById(id))
+    };
+
+    handleDeleteClick = (event, id) => {
         const { dispatch } = this.props;
         dispatch(taskAction.deleteTaskById(id))
     };
@@ -123,12 +135,15 @@ class Task extends Component {
                                     </TableCell>
                                     <TableCell numeric>{n.description}</TableCell>
                                     <TableCell numeric>{n.assignedTo}</TableCell>
-                                    <TableCell>{n.dueDate}</TableCell>
+                                    <TableCell>{moment(n.dueDate).format('DD/MM/YYYY')}</TableCell>
                                     <TableCell>
+                                        <IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleDoneClick(event, n._id)}>
+                                           <CheckCircleIcon /> 
+                                        </IconButton>
                                         <IconButton className={classes.button} aria-label="Edit" component='a' href={`/edit-task/${n._id}`}>
                                            <EditIcon />
                                         </IconButton>
-                                        <IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleClick(event, n._id)}>
+                                        <IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleDeleteClick(event, n._id)}>
                                            <DeleteIcon /> 
                                         </IconButton>
                                     </TableCell>
@@ -148,6 +163,7 @@ class Task extends Component {
 Task.propTypes = {
      classes: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) =>{
     return {
        task : state.task

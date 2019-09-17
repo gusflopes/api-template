@@ -3,34 +3,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
+const IntimationSchema = new Schema({
     organization_id : {
         type: String,
         //required: true
     },
-    
     process_number: {
         type: String,
         required: false
-    },
-    name : {
-        type: String,
+
+      },
+    date : {
+        type: Date,
         required: true
     },
     description : {
         type: String,
     },
-    assignedTo : {
-       type: String,
-       required: true
-    },
-    dueDate : {
-        type: Date,
-        required: true
-    },
-    pending : {
+    read : {
         type: Boolean,
-        default: true
+        default: false
     },
     is_active : {
         type: Boolean,
@@ -50,8 +42,8 @@ const TaskSchema = new Schema({
     timestamps: true
 });
 
-TaskSchema.pre('find', function () {
+IntimationSchema.pre('find', function () {
     this.where({ is_active: { $ne: false } });
 });
 
-module.exports = mongoose.model('Task', TaskSchema);
+module.exports = mongoose.model('Intimation', IntimationSchema);

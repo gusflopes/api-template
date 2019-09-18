@@ -52,7 +52,7 @@ module.exports = {
         Intimation
         .findByIdAndUpdate(intimationId, { $set: req.body }).exec((err, intimationDetails) => {
             if (err) res.status(500).json({message : err})
-            res.status(200).json({auth: true, token: token , data: intimationDetails, message: "Intimation updated" });
+            res.status(200).json({auth: true, token: token , data: req.body, message: "Intimation updated" });
 
         })
     },    

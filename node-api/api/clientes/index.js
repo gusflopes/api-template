@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const controller = require('./intimations.controller');
+const controller = require('./clientes.controller');
 const router = express.Router();
 const VerifyToken = require('../auths/verifyToken');
 const NewToken = require('../auths/newToken');

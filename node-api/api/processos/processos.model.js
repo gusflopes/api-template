@@ -3,12 +3,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-import ClienteSchema from './clientes.model';
-import PrazosSchema from '../prazos.model';
+// import ClienteSchema from '../models/clientes.model';
+// import PrazosSchema from '../models/prazos.model';
 
 const ProcessoSchema = new Schema({
    // Relacionamento
-   escritorio_id : {
+   // sera modificado quando for refazer Usuarios
+   organization_id : {
       type: String,
       //required: true
    },

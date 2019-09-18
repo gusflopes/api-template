@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const IntimationSchema = new Schema({
     organization_id : {
         type: String,
-        //required: true
+        required: true
     },
     process_number: {
         type: String,

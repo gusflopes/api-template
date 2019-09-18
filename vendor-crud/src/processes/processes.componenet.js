@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { taskAction } from '../_actions';
+import { processAction } from '../_actions';
 import React, { Component } from 'react';
 import AppBar from '../_components/appbar';
 import Nav from '../_components/nav';
@@ -59,14 +59,14 @@ const styles = theme => ({
         padding: theme.spacing.unit * 4,
     },
 });
-class Task extends Component {
+class Process extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(taskAction.getTask());
+        dispatch(processAction.getProcess());
     }
     componentDidUpdate() {
         // Delete this later
-        console.log(this.props.task);
+        console.log(this.props.process);
     }
 
     handleChange = event => {
@@ -76,16 +76,16 @@ class Task extends Component {
     };
     handleDoneClick = (event, id) => {
         const { dispatch } = this.props;
-        dispatch(taskAction.deleteTaskById(id))
+        dispatch(processAction.deleteProcessById(id))
     };
 
     handleDeleteClick = (event, id) => {
         const { dispatch } = this.props;
-        dispatch(taskAction.deleteTaskById(id))
+        dispatch(processAction.deleteProcessById(id))
     };
     render() {
         const { classes } = this.props;
-        const { task } = this.props.task;
+        const { process } = this.props.process;
         return (
             <div className={classes.root}>
               <div className={classes.appFrame}>
@@ -95,57 +95,54 @@ class Task extends Component {
                    <div className={classes.toolbar} />
                    <Grid container spacing={24}>
                       <Grid item xs={3}>
-                         <Typography>{'Prazos'}</Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                      </Grid>
-                      <Grid item xs={3} container justify="flex-end">
-                      </Grid>
-                   </Grid>
-                   <Grid container spacing={24}>
-                      <Grid item xs={3}>
+                         <Typography >{'PROCESSOS'}</Typography>
                       </Grid>
                       <Grid item xs={6}>
                       </Grid>
                       <Grid item xs={3} container justify="flex-end">
                           <Button variant="contained" color="primary" 
-                          className={classes.button} component='a' href="/add-task"
-                          >Add Task</Button>
+                          className={classes.button} component='a' href="/add-process"
+                          >Adicionar</Button>
                       </Grid>
                    </Grid>
-                   <br /><br />
+                   <br />
                    <Grid container spacing={24}>
                      <Paper className={classes.root}>
                        <Table className={classes.table}>
                           <TableHead>
-                             <TableRow>
-                                <TableCell>Tipo</TableCell>
-                                <TableCell numeric>Descrição</TableCell>
-                                <TableCell numeric>Responsável</TableCell>
-                                <TableCell>Prazo Fatal</TableCell>
-                                <TableCell>Ações</TableCell>
+                             <TableRow >
+                                <TableCell >Pasta</TableCell>
+                                <TableCell >Cliente</TableCell>
+                                <TableCell >Telefone</TableCell>
+                                <TableCell >Processo</TableCell>
+                                <TableCell >Tipo de Ação</TableCell>
+                                <TableCell >Status</TableCell>
+
+                                <TableCell>Editar</TableCell>
                              </TableRow>
                           </TableHead>
                           <TableBody>
-                           {task.map(n => {
+                           {process.map(n => {
                               return (
                                   <TableRow key={n._id}>
                                     <TableCell component="th" scope="row">
                                       {n.name}
                                     </TableCell>
-                                    <TableCell numeric>{n.description}</TableCell>
-                                    <TableCell numeric>{n.assignedTo}</TableCell>
-                                    <TableCell>{moment(n.dueDate).format('DD/MM/YYYY')}</TableCell>
-                                    <TableCell>
-                                        <IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleDoneClick(event, n._id)}>
+                                    <TableCell >{n.description}</TableCell>
+                                    <TableCell >{n.assignedTo}</TableCell>
+                                    <TableCell >123456-78.2019.8.12.0001</TableCell>
+                                    <TableCell >Previdenciária</TableCell>
+                                    <TableCell >Ativa</TableCell>
+                                    <TableCell >
+                                        <IconButton className={classes.button} aria-label="Cliente" onClick={(event) => this.handleDoneClick(event, n._id)}>
                                            <CheckCircleIcon /> 
                                         </IconButton>
-                                        <IconButton className={classes.button} aria-label="Edit" component='a' href={`/edit-task/${n._id}`}>
+                                        <IconButton className={classes.button} aria-label="Processo" component='a' href={`/edit-process/${n._id}`}>
                                            <EditIcon />
                                         </IconButton>
-                                        <IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleDeleteClick(event, n._id)}>
+                                        {/* <IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleDeleteClick(event, n._id)}>
                                            <DeleteIcon /> 
-                                        </IconButton>
+                                        </IconButton> */}
                                     </TableCell>
                                  </TableRow>
                              );
@@ -160,16 +157,16 @@ class Task extends Component {
    );
   }
 }
-Task.propTypes = {
+Process.propTypes = {
      classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) =>{
     return {
-       task : state.task
+       process : state.process
     };
 }
-const connectedTaskPage = withRouter(connect(mapStateToProps, null, null, {
+const connectedProcessPage = withRouter(connect(mapStateToProps, null, null, {
     pure: false
-})(withStyles(styles)(Task)));
-export { connectedTaskPage as Task };
+})(withStyles(styles)(Process)));
+export { connectedProcessPage as Process };

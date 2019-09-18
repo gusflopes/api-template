@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home';
 import LogoutIcon from '@material-ui/icons/HighlightOff';
 import VendorIcon from '@material-ui/icons/CardTravel';
+import GavelIcon from '@material-ui/icons/Gavel';
 import TaskIcon from "@material-ui/icons/List";
 const drawerWidth = 240;
 const styles = theme => ({
@@ -78,16 +79,20 @@ class Navigation extends React.Component {
                      <ListItemIcon>
                         <VendorIcon />
                      </ListItemIcon>
-                     <ListItemText primary="Vendors"/>
+                     <ListItemText primary="Vendors/Clientes"/>
+                  </ListItem>
+                  <ListItem button component='a' href="/process">
+                     <ListItemIcon>
+                         <GavelIcon />
+                     </ListItemIcon>
+                     <ListItemText primary="Processos"/>
                   </ListItem>
                   <ListItem button component='a' href="/task">
                      <ListItemIcon>
                         <TaskIcon />
                      </ListItemIcon>
-                     <ListItemText primary="Tasks"/>
+                     <ListItemText primary="Prazos"/>
                   </ListItem>
-
-
                   <ListItem button onClick={(event)=>{this.logout()}}>
                      <ListItemIcon>
                         <LogoutIcon />

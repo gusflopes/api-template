@@ -63,6 +63,7 @@ class Process extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(processAction.getProcess());
+        console.log(this.props.process);
     }
     componentDidUpdate() {
         // Delete this later
@@ -83,6 +84,8 @@ class Process extends Component {
         const { dispatch } = this.props;
         dispatch(processAction.deleteProcessById(id))
     };
+    teste = () => { console.log("teste") };
+
     render() {
         const { classes } = this.props;
         const { process } = this.props.process;
@@ -126,23 +129,24 @@ class Process extends Component {
                               return (
                                   <TableRow key={n._id}>
                                     <TableCell component="th" scope="row">
-                                      {n.name}
+                                      {n.pasta}
                                     </TableCell>
-                                    <TableCell >{n.description}</TableCell>
-                                    <TableCell >{n.assignedTo}</TableCell>
-                                    <TableCell >123456-78.2019.8.12.0001</TableCell>
-                                    <TableCell >Previdenciária</TableCell>
-                                    <TableCell >Ativa</TableCell>
+                                    <TableCell >{n.cliente_processo.nome}</TableCell>
+                                    <TableCell >{n.cliente_processo.celular}</TableCell>
+                                    <TableCell >{n.numero_processo}</TableCell>
+                                    <TableCell >{n.tipo}</TableCell>
+                                    <TableCell >{n.status}</TableCell>
                                     <TableCell >
-                                        <IconButton className={classes.button} aria-label="Cliente" onClick={(event) => this.handleDoneClick(event, n._id)}>
-                                           <CheckCircleIcon /> 
-                                        </IconButton>
                                         <IconButton className={classes.button} aria-label="Processo" component='a' href={`/edit-process/${n._id}`}>
                                            <EditIcon />
                                         </IconButton>
-                                        {/* <IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleDeleteClick(event, n._id)}>
+                                        {/* }<IconButton className={classes.button} aria-label="Delete" onClick={(event) => this.handleDeleteClick(event, n._id)}>
                                            <DeleteIcon /> 
-                                        </IconButton> */}
+                                        </IconButton>
+                                            <IconButton className={classes.button} aria-label="Cliente" onClick={(event) => this.handleDoneClick(event, n._id)}>
+                                           <CheckCircleIcon /> 
+                                        </IconButton>
+ */}
                                     </TableCell>
                                  </TableRow>
                              );

@@ -9,6 +9,7 @@ import { Task } from './tasks/task.componenet';
 import {AddTask} from './tasks/addtask.component';
 import { history } from './_helpers';
 import { PrivateRoute } from './_components';
+import { Process } from './processes/processes.component';
 
 class App extends Component {
     render() {
@@ -24,6 +25,7 @@ class App extends Component {
                         <PrivateRoute exact path='/task' component={Task} />
                         <PrivateRoute exact path='/add-task' component={AddTask} />
                         <PrivateRoute exact path='/edit-task/:id' component={AddTask} />
+                        <PrivateRoute exact path='/process' component={Process} />
                         
                         <Route exact path='/' component={Login} />
                         {/* Caso digite um path não mapeado, retorna ao Login ou Home*/}

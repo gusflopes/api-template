@@ -36,7 +36,7 @@ function getProcess(){
         this.props.history.push("login");
         }*/
     
-        client.get("processs/", true).then((response)=> {
+        client.get("processos/join/", true).then((response)=> {
             dispatch(changeProcessesList(response.data.data));
         }).catch((err)=>{
             console.log(err);
@@ -45,17 +45,18 @@ function getProcess(){
 }
 function createProcess(payload){
     return dispatch => {
-        let apiEndpoint = 'processs/';
+        let apiEndpoint = 'processos/';
         userService.post(apiEndpoint, payload)
         .then((response)=>{
             dispatch(createUserInfo());
+            // Verificar aqui
             history.push('/process');
         })
     }
 }
 function getProcessById(id){
     return dispatch => {
-        let apiEndpoint = 'processs/details/'+ id;
+        let apiEndpoint = 'processos/'+ id;
         userService.get(apiEndpoint)
         .then((response)=>{
             dispatch(editProcessesDetails(response.data.data));
@@ -65,7 +66,7 @@ function getProcessById(id){
 
 function editProcessInfo(id, payload){
     return dispatch => {
-        let apiEndpoint = 'processs/'+ id;
+        let apiEndpoint = 'processos/'+ id;
         userService.put(apiEndpoint, payload)
         .then((response)=>{
             dispatch(updatedUserInfo());
@@ -75,7 +76,7 @@ function editProcessInfo(id, payload){
 }
 function deleteProcessById(id){
     return dispatch => {
-        let apiEndpoint = 'processs/'+ id;
+        let apiEndpoint = 'processos/'+ id;
         userService.deleteDetail(apiEndpoint)
         .then((response)=>{
              dispatch(deleteProcessesDetails());
@@ -89,10 +90,17 @@ export function editProcessesDetails(process){
     return{
         type: "PROCESS_DETAIL",
         id: process._id,
-        name: process.name,
-        description: process.description,
-        assignedTo: process.assignedTo,
-        dueDate: process.dueDate
+        pasta: process.pasta,
+        numeroProcesso: process.numeroProcesso,
+        cliente: process.cliente,
+        tipo: process.tipo,
+        status: process.status,
+        propositura: process.propositura,
+        juizo: process.juizo,
+        comarca: process.comarca,
+        tribunal: process.tribunal,
+        observacoes: process.observacoes,
+        
     }
 }
 
@@ -120,6 +128,7 @@ export function handleOnChangeProps(props, value){
         value: value
     }
 }
+
 export function handleOnChangeDate(props, value){
     console.log("PARTE FINAL do Process.Action");
     return{
@@ -128,6 +137,7 @@ export function handleOnChangeDate(props, value){
         value: value
     }
 }
+
 
 // LIDAR COM AS RESPOSTAS DA API ###############################################
 

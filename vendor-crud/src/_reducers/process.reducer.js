@@ -27,12 +27,17 @@ export function process(state = initialState, action) {
        case 'PROCESS_DETAIL':
            return {
                ...state,
-               // configurar
                id: action.id,
-               name: action.name,
-               description: action.description,
-               assignedTo: action.assignedTo,
-               dueDate: moment(action.dueDate).format('DD/MM/YYYY')
+               pasta: action.pasta,
+               numero_processo: action.numero_processo,
+               cliente: action.cliente,
+               tipo: action.tipo,
+               status: action.status,
+               propositura: moment(action.propositura).format('DD/MM/YYYY'),
+               juizo: action.juizo,
+               comarca: action.comarca,
+               tribunal: action.tribunal,
+               observacoes: action.observacoes
            };
        case "USER_UPDATED":
            return state;

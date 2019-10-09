@@ -1,0 +1,20 @@
+nav {
+  grid-area: nav;
+  background-color: #E2E1E1;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+nav ul li {
+  padding: 15px 0;
+}
+
+nav ul li svg {
+  color: #888888;
+}

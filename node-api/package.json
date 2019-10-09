@@ -4,7 +4,7 @@
   "description": "Modelo de API usando NodeJS + JWT + MongoDB",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -35,5 +35,8 @@
     "mongoose": "^5.7.0",
     "morgan": "^1.9.1",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
   }
 }

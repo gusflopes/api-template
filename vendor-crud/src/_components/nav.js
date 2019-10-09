@@ -30,88 +30,94 @@ const styles = theme => ({
         width: `calc(100% - ${drawerWidth}px)`,
     },
     'appBar-left': {
-         marginLeft: drawerWidth,
+        marginLeft: drawerWidth,
     },
     'appBar-right': {
-         marginRight: drawerWidth,
+        marginRight: drawerWidth,
     },
     drawerPaper: {
         position: 'relative',
         width: drawerWidth,
     },
     toolbar: theme.mixins.toolbar,
-        content: {
-            flexGrow: 1,
-            backgroundColor: theme.palette.background.default,
-            padding: theme.spacing.unit * 3,
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
     },
 });
 class Navigation extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-           anchor: 'left',
+        this.state = {
+            anchor: 'left',
         }
     }
-    logout = event =>{
+    logout = event => {
         const { dispatch } = this.props;
         dispatch(userActions.logout());
     }
     render() {
         const { classes } = this.props;
         const { anchor } = this.state;
-        return(
+        return (
             <Drawer
-             variant="permanent"
-             classes={{
-                 paper: classes.drawerPaper,
-             }}
-             anchor={anchor}
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+                anchor={anchor}
             >
-               <List component="nav">
-                  <ListItem button component='a' href="/home">
-                     <ListItemIcon>
-                        <HomeIcon />
-                     </ListItemIcon>
-                     <ListItemText primary="Home"/>
-                  </ListItem>
-                  <ListItem button component='a' href="/vendor">
-                     <ListItemIcon>
-                        <VendorIcon />
-                     </ListItemIcon>
-                     <ListItemText primary="Vendors/Clientes"/>
-                  </ListItem>
-                  <ListItem button component='a' href="/process">
-                     <ListItemIcon>
-                         <GavelIcon />
-                     </ListItemIcon>
-                     <ListItemText primary="Processos"/>
-                  </ListItem>
-                  <ListItem button component='a' href="/task">
-                     <ListItemIcon>
-                        <TaskIcon />
-                     </ListItemIcon>
-                     <ListItemText primary="Prazos"/>
-                  </ListItem>
-                  <ListItem button onClick={(event)=>{this.logout()}}>
-                     <ListItemIcon>
-                        <LogoutIcon />
-                     </ListItemIcon>
-                     <ListItemText primary="Logout"/>
-                  </ListItem>
-               </List>
-               <Divider />
-           </Drawer>
+                <List component="nav">
+                    <ListItem button component='a' href="/home">
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItem>
+                    <ListItem button component='a' href="/vendor">
+                        <ListItemIcon>
+                            <VendorIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Vendors/Clientes" />
+                    </ListItem>
+                    <ListItem button component='a' href="/process">
+                        <ListItemIcon>
+                            <GavelIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Processos" />
+                    </ListItem>
+                    <ListItem button component='a' href="/task">
+                        <ListItemIcon>
+                            <TaskIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Prazos" />
+                    </ListItem>
+                    <ListItem button component='a' href="/clients">
+                        <ListItemIcon>
+                            <VendorIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Clientes" />
+                    </ListItem>
+                    <ListItem button onClick={(event) => { this.logout() }}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </ListItem>
+                </List>
+                <Divider />
+            </Drawer>
         );
     }
 }
 Navigation.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
     const { loggingIn } = state.authentication;
     return {
-       loggingIn
+        loggingIn
     };
 }
 export default connect(mapStateToProps)(withStyles(styles)(Navigation));

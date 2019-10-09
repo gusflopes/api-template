@@ -1,0 +1,57 @@
+header {
+  background-color: #8A97CA;
+  display: grid;
+  grid-template-columns: 70px 1fr 250px;
+  grid-template-rows: 70px;
+  justify-content: center;
+  align-items: center;
+  grid-area: header;
+}
+
+header .menu-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #383838;
+}
+
+header .menu-icon svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+header .page-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+header .page-title h1 {
+  margin-left: 160px;
+  font-size: 1.4em;
+  color: #383838;
+}
+
+header form .input-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header form .input-style input {
+  height: 35px;
+  border: none;
+  border-radius: 2px;
+  margin-left: -2px;
+  padding-left: 10px;
+}
+
+header form .input-style svg {
+  background-color: #FFF;
+  width: 35px;
+  padding: 8px;
+  height: 35px;
+  border-radius: 2px;
+  color: #383838;
+}

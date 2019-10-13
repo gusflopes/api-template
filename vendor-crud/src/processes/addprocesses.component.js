@@ -17,7 +17,7 @@ import { MuiPickersUtilsProvider,
     KeyboardDatePicker } from '@material-ui/pickers';
 
 import { connect } from 'react-redux';
-import { taskAction } from '../_actions';
+import { processAction } from '../_actions';
 import { withRouter } from 'react-router-dom';
 const drawerWidth = 240;
 const styles = theme => ({
@@ -57,7 +57,7 @@ const styles = theme => ({
     },
 });
 
-class AddTask extends Component {
+class AddProcess extends Component {
     handleChange = prop => event => {
         console.log(this.props);
         console.log(this.event);
@@ -66,7 +66,7 @@ class AddTask extends Component {
         console.log('event param', event)
         
         const { dispatch } = this.props;
-        dispatch(taskAction.onChangeProps(prop, event));
+        dispatch(processAction.onChangeProps(prop, event));
     }
     handleDateChange = (prop) => {
         const event = {
@@ -76,14 +76,14 @@ class AddTask extends Component {
         }
 
         const { dispatch } = this.props;
-        dispatch(taskAction.onChangeProps('dueDate', event));
+        dispatch(processAction.onChangeProps('dueDate', event));
     };
 
     componentDidMount() {
         const { match : { params } } = this.props;
         if(params.id) {
             const { dispatch } = this.props;
-            dispatch(taskAction.getTaskById(params.id));
+            dispatch(processAction.getProcessById(params.id));
         }
     }
     handleClick(event){
@@ -92,28 +92,28 @@ class AddTask extends Component {
         console.log('Erro antes do payload');
 
         let payload={
-            name: this.props.task.name,
-            description: this.props.task.description,
-            assignedTo: this.props.task.assignedTo,
-            dueDate: moment(this.props.task.dueDate, "DD/MM/YYYY").toDate()
+            name: this.props.process.name,
+            description: this.props.process.description,
+            assignedTo: this.props.process.assignedTo,
+            dueDate: moment(this.props.process.dueDate, "DD/MM/YYYY").toDate()
         }
         console.log("dueDate", payload);
 
         if(params.id){
-            dispatch(taskAction.editTaskInfo(params.id, payload));
+            dispatch(processAction.editProcessInfo(params.id, payload));
         }else{
-            dispatch(taskAction.createTask(payload));
+            dispatch(processAction.createProcess(payload));
         }
     }
     render() {
         const { classes } = this.props;
         const { match : { params } } = this.props;
         function InsertText(props) {
-            return <Typography>{'Add New Task'}</Typography>;
+            return <Typography>{'Add New Process'}</Typography>;
         }
 
         function EditText(props) {
-            return <Typography>{'Edit Task'}</Typography>;
+            return <Typography>{'Edit Process'}</Typography>;
         }
         function SegHeader() {
             if(params.id){
@@ -146,30 +146,30 @@ class AddTask extends Component {
                                 <Grid container spacing={24}>
                                    <Grid item xs={3}>
                                       <TextField
-                                       id="name"
-                                       label="Name"
+                                       id="pasta"
+                                       label="Pasta"
                                        className={classes.textField}
-                                       value={this.props.task.name}
+                                       value={this.props.process.name}
                                        onChange={this.handleChange('name')}
                                        margin="normal"
                                       />
                                    </Grid>
                                    <Grid item xs={3}>
                                       <TextField
-                                       id="description"
-                                       label="Description"
+                                       id="numeroProcesso"
+                                       label="Número do Processo"
                                        className={classes.textField}
-                                       value={this.props.task.description}
+                                       value={this.props.process.description}
                                        onChange={this.handleChange('description')}
                                        margin="normal"
                                       />
                                    </Grid>
                                    <Grid item xs={3}>
                                       <TextField
-                                       id="assignedTo"
-                                       label="assignedTo"
+                                       id="tipo"
+                                       label="Tipo"
                                        className={classes.textField}
-                                       value={this.props.task.assignedTo}
+                                       value={this.props.process.assignedTo}
                                        onChange={this.handleChange('assignedTo')}
                                        margin="normal"
                                       />
@@ -177,15 +177,15 @@ class AddTask extends Component {
                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                    <Grid item xs={3}>
                                       <KeyboardDatePicker
-                                        id="dueDate"
-                                        label="dueDate"
+                                        id="propositura"
+                                        label="Propositura"
                                         multiline
                                         rowsMax="4"
                                         format="dd/MM/yyyy"
                                         disablePast="true"
                                         className={classes.textField}
-                                        inputValue={this.props.task.dueDate}
-                                        value={this.props.task.dueDate}
+                                        inputValue={this.props.process.dueDate}
+                                        value={this.props.process.dueDate}
                                         onChange={this.handleDateChange}
                                         margin="normal"
                                         KeyboardButtonProps={{'aria-label': 'change date'}}
@@ -202,7 +202,7 @@ class AddTask extends Component {
                                    <Grid item xs={3} container justify="center">
                                       <Grid container spacing={24}>
                                          <Grid item xs={6} container justify="center">
-                                            <Button variant="contained" color="secondary" className={classes.button} component='a' href="/task">Cancel</Button>
+                                            <Button variant="contained" color="secondary" className={classes.button} component='a' href="/process">Cancel</Button>
                                          </Grid>
                                          <Grid item xs={6} container justify="flex-start">
                                             <Button variant="contained" color="primary" className={classes.button} onClick={(event) => this.handleClick(event)}>Save</Button>
@@ -221,14 +221,14 @@ class AddTask extends Component {
         );
     }
 }
-AddTask.propTypes = {
+AddProcess.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) =>{
     return state;
 }
 
-const connectedAddTaskPage = withRouter(connect(mapStateToProps, null, null, {
+const connectedAddProcessPage = withRouter(connect(mapStateToProps, null, null, {
     pure: false
-})(withStyles(styles)(AddTask)));
-export { connectedAddTaskPage as AddTask };
+})(withStyles(styles)(AddProcess)));
+export { connectedAddProcessPage as AddProcess };
